@@ -1,2 +1,10 @@
 site_name: My Docs
 theme: readthedocs
+docs_dir: docs
+pages:
+- Home Page: index.md
+- Classification: 
+	 logistic regression: Classification/logistic_regression.md
+	- random forest: Classification/random_forest.md
+	- support vector machine: Classification/support_vector_machine.md
+	- back-propagation neural networks: Classification/back_propagation_neural_networks.md
