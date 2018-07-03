@@ -3,7 +3,7 @@
         {
             "location": "/",
             "text": "Welcome to MkDocs\n\n\nFor full documentation visit \nmkdocs.org\n.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.\n\n\n\nClassification\n\n\nClustering",
-            "title": "Welcome to MkDocs"
+            "title": "Home Page"
         },
         {
             "location": "/#welcome-to-mkdocs",
@@ -29,6 +29,46 @@
             "location": "/#clustering",
             "text": "",
             "title": "Clustering"
+        },
+        {
+            "location": "/Classification/logistic_regression/",
+            "text": "Introduction\n\n\nLogistic Regression\uff0c\u903b\u8f91\u65af\u8482\u56de\u5f52\u3002",
+            "title": "logistic regression"
+        },
+        {
+            "location": "/Classification/logistic_regression/#introduction",
+            "text": "Logistic Regression\uff0c\u903b\u8f91\u65af\u8482\u56de\u5f52\u3002",
+            "title": "Introduction"
+        },
+        {
+            "location": "/Classification/random_forest/",
+            "text": "Introduction\n\n\nRandom Forest\uff0c\u968f\u673a\u68ee\u6797\u3002",
+            "title": "random forest"
+        },
+        {
+            "location": "/Classification/random_forest/#introduction",
+            "text": "Random Forest\uff0c\u968f\u673a\u68ee\u6797\u3002",
+            "title": "Introduction"
+        },
+        {
+            "location": "/Classification/support_vector_machine/",
+            "text": "Introduction\n\n\nSupport Vector Machine(SVM)\uff0c\u652f\u6301\u5411\u91cf\u673a\u3002",
+            "title": "support vector machine"
+        },
+        {
+            "location": "/Classification/support_vector_machine/#introduction",
+            "text": "Support Vector Machine(SVM)\uff0c\u652f\u6301\u5411\u91cf\u673a\u3002",
+            "title": "Introduction"
+        },
+        {
+            "location": "/Classification/back_propagation_neural_networks/",
+            "text": "Introduction\n\n\nBack-propagation neural networks\uff0c\u53cd\u5411\u4f20\u64ad\u795e\u7ecf\u7f51\u7edc\u3002",
+            "title": "back-propagation neural networks"
+        },
+        {
+            "location": "/Classification/back_propagation_neural_networks/#introduction",
+            "text": "Back-propagation neural networks\uff0c\u53cd\u5411\u4f20\u64ad\u795e\u7ecf\u7f51\u7edc\u3002",
+            "title": "Introduction"
         }
     ]
 }
