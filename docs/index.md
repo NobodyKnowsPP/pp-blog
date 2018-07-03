@@ -1,5 +1,4 @@
 # Welcome to PP's Notes
 
-These are what I have learned.
-
-我爱学习。
+这里纪录一些我所学习的机器学习算法，基础知识和使用工具时遇到的问题。
+Enjoy learning~
