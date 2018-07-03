@@ -2,7 +2,7 @@ site_name: PP's Notes
 theme: readthedocs
 docs_dir: docs
 pages:
-- Home Page: index.md
+- Welcome: index.md
 - Classification: 
     - logistic regression: Classification/logistic_regression.md
     - random forest: Classification/random_forest.md
