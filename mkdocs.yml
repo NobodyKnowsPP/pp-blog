@@ -8,3 +8,5 @@ pages:
     - random forest: Classification/random_forest.md
     - support vector machine: Classification/support_vector_machine.md
     - back-propagation neural networks: Classification/back_propagation_neural_networks.md
+- User profile:
+    - Introduction: UserProfile/Introduction.md
