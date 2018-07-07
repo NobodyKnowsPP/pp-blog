@@ -1,11 +1,11 @@
 # Definition
 
-参考资料来源于[什么是用户画像呢？一般用户画像的作用是什么？](https://www.zhihu.com/question/19853605/answer/51552384)
+参考资料来源于[什么是用户画像呢？一般用户画像的作用是什么？-知乎](https://www.zhihu.com/question/19853605/answer/51552384)
 
 用户画像是根据用户社会属性、生活习惯和消费行为等信息而抽象出的一个标签化的用户模型。
 构建用户画像的核心工作是给用户贴“标签”，而标签是通过对用户信息分析而来的高度精炼的特征标识。
 
-# User profile and User Persona
+# User profile vs. User Persona
 
 这里所说的用户画像指的是User profile。
 与User profile相关联的一个概念是User persona，它译做用户角色，但是在很多地方也被译作了用户画像。
