@@ -77,7 +77,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine</a>
+    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
                 </li>
                 <li class="">
                     
@@ -134,6 +134,36 @@
     <a class="current" href="./">Java 51-60</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#51">51</a></li>
+    
+
+    <li class="toctree-l3"><a href="#52">52 正则表达式匹配</a></li>
+    
+
+    <li class="toctree-l3"><a href="#53">53 表示数值的字符串</a></li>
+    
+
+    <li class="toctree-l3"><a href="#54">54 字符流中第一个不重复的字符</a></li>
+    
+
+    <li class="toctree-l3"><a href="#55">55 链表中环的入口结点</a></li>
+    
+
+    <li class="toctree-l3"><a href="#56">56 删除链表中重复的结点</a></li>
+    
+
+    <li class="toctree-l3"><a href="#57">57 二叉树的下一个结点</a></li>
+    
+
+    <li class="toctree-l3"><a href="#58">58 对称的二叉树</a></li>
+    
+
+    <li class="toctree-l3"><a href="#59">59 按之字形顺序打印二叉树</a></li>
+    
+
+    <li class="toctree-l3"><a href="#60">60 把二叉树打印成多行</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -179,7 +209,298 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="51">51</h1>
+<p>给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。</p>
+<pre><code>import java.util.ArrayList;
+public class Solution {
+    public int[] multiply(int[] A) {
+        int[] arr = new int[A.length];
+        for(int i=0; i&lt;arr.length; i++){arr[i]=1;}
+        for(int i=0; i&lt;A.length; i++){
+            for(int j=0; j&lt;A.length; j++){
+                if(j==i){
+                    continue;
+                }
+                arr[i] *= A[j];
+            }
+        }
+        return arr;
+    }
+}
+</code></pre>
+
+<h1 id="52">52 正则表达式匹配</h1>
+<p>请实现一个函数用来匹配包括'.'和'<em>'的正则表达式。模式中的字符'.'表示任意一个字符，而'</em>'表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab<em>ac</em>a"匹配，但是与"aa.a"和"ab*a"均不匹配。</p>
+<pre><code>public class Solution {
+    public boolean match(char[] str, char[] pattern) {
+        if (str == null || pattern == null) {
+            return false;
+        }
+        int strIndex = 0;
+        int patternIndex = 0;
+        return matchCore(str, strIndex, pattern, patternIndex);
+    }
+
+    public boolean matchCore(char[] str, int strIndex, char[] pattern, int patternIndex) {
+        if (strIndex == str.length &amp;&amp; patternIndex == pattern.length) {
+            return true;
+        }
+        if (strIndex != str.length &amp;&amp; patternIndex == pattern.length) {
+            return false;
+        }
+        if (patternIndex + 1 &lt; pattern.length &amp;&amp; pattern[patternIndex + 1] == '*') {
+            if ((strIndex != str.length &amp;&amp; pattern[patternIndex] == str[strIndex]) || (pattern[patternIndex] == '.' &amp;&amp; strIndex != str.length)) {
+             return matchCore(str, strIndex, pattern, patternIndex + 2)
+                || matchCore(str, strIndex + 1, pattern, patternIndex + 2)
+                || matchCore(str, strIndex + 1, pattern, patternIndex);
+            } else {
+                return matchCore(str, strIndex, pattern, patternIndex + 2);
+            }
+        }
+        if ((strIndex != str.length &amp;&amp; pattern[patternIndex] == str[strIndex]) || (pattern[patternIndex] == '.' &amp;&amp; strIndex != str.length)) {
+        return matchCore(str, strIndex + 1, pattern, patternIndex + 1);
+        }
+        return false;
+    }
+}
+</code></pre>
+
+<h1 id="53">53 表示数值的字符串</h1>
+<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。</p>
+<pre><code>public class Solution {
+    public boolean isNumeric(char[] str) {
+        String s = String.valueOf(str);
+        return s.matches(&quot;[\\+-]?[0-9]*(\\.[0-9]*)?([eE][\\+-]?[0-9]+)?&quot;);
+    }
+}
+</code></pre>
+
+<h1 id="54">54 字符流中第一个不重复的字符</h1>
+<p>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，当从字符流中只读出前两个字符"go"时，第一个只出现一次的字符是"g"。当从该字符流中读出前六个字符“google"时，第一个只出现一次的字符是"l"。</p>
+<p>输出描述:</p>
+<p>如果当前字符流没有存在出现一次的字符，返回#字符。</p>
+<pre><code>import java.util.ArrayList;
+public class Solution {
+    class Element{
+        char c;
+        int count;
+        public Element(char c){
+            this.c = c;
+            count = 1;
+        }
+        public void add(){
+            ++count;
+        }
+    }
+
+    ArrayList&lt;Element&gt; list = new ArrayList&lt;&gt;();
+    //Insert one char from stringstream
+    public void Insert(char ch)
+    {
+        boolean find = false;
+        for(int i=0; i&lt;list.size(); i++){
+            if(list.get(i).c == ch){
+                find = true;
+                list.get(i).add();
+            }
+        }
+        if(!find){
+            list.add(new Element(ch));
+        }
+    }
+    //return the first appearence once char in current stringstream
+    public char FirstAppearingOnce()
+    {
+        for(int i=0; i&lt;list.size(); i++){
+            if(list.get(i).count == 1){
+                return list.get(i).c;
+            }
+        }
+        return '#';
+    }
+}
+</code></pre>
+
+<h1 id="55">55 链表中环的入口结点</h1>
+<p>给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。</p>
+<pre><code>import java.util.HashSet;
+public class Solution {
+    public ListNode EntryNodeOfLoop(ListNode pHead)
+    {
+        if(pHead == null){return null;}
+        HashSet&lt;ListNode&gt; set = new HashSet&lt;&gt;();
+        while(pHead.next!=null){
+            int before = set.size();
+            set.add(pHead);
+            int after = set.size();
+            if(after == before){ return pHead; }
+            else{
+                pHead = pHead.next;
+            }
+        }
+        return null;
+    }
+}
+</code></pre>
+
+<h1 id="56">56 删除链表中重复的结点</h1>
+<p>在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5 处理后为 1-&gt;2-&gt;5</p>
+<pre><code>public class Solution {
+    public ListNode deleteDuplication(ListNode pHead)
+    {
+        if(pHead == null){return null;}
+        if(pHead.next == null){return pHead;}
+
+        if(pHead.next.val == pHead.val){//当前节点是重复节点
+            ListNode p = pHead.next;//将p指向当前节点后面的重复节点
+            while(p!=null &amp;&amp; p.val==pHead.val){//找到一个与当前节点不同的节点(如果p指向的节点与当前节点相同，p后移)
+                p = p.next;
+            }
+            if(p==null){return null;}//如果p走到最后的null了，那么当前节点到最后都是重复的，返回null(再递归一次也是可以的)
+            else{return deleteDuplication(p);}//找到了与当前节点不同的节点，先不管这个节点是否也重复了，直接递归调用
+            // 如果后面这个节点还是重复的，后面的递归会处理的
+        }else{//当前节点不是重复节点
+            pHead.next = deleteDuplication(pHead.next);//保留当前节点，递归后面的节点
+            return pHead;
+        }
+    }
+}
+</code></pre>
+
+<h1 id="57">57 二叉树的下一个结点</h1>
+<p>给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。</p>
+<pre><code>public class Solution {
+    public TreeLinkNode GetNext(TreeLinkNode pNode)
+    {
+        if(pNode.right!=null){//有右子树
+            //查找右子树的最左
+            TreeLinkNode sub_right = pNode.right;
+            while(sub_right.left!=null){
+                sub_right = sub_right.left;
+            }
+            return sub_right;
+        }else{
+            //没有右子树，查找父节点
+            if(pNode.next!=null){
+                if(pNode == pNode.next.left) {//如果该节点是其父节点的左节点
+                    return pNode.next;//返回其父节点
+                }else{//该节点是其父节点的右节点
+                    TreeLinkNode parent = pNode.next;
+                    TreeLinkNode right = pNode;
+                    while(parent.next != null &amp;&amp; right == parent.right){
+                        right = parent;
+                        parent = parent.next;
+                    }
+                    if(right == parent.left){//如果找到了这个节点是其左子树的某个节点，那么返回这个父节点
+                        return parent;
+                    }else{//如果往上的节点全是右节点，则这个点是最后一个节点，返回null
+                        return null;
+                    }
+                }
+            }else{//没有父节点，(该节点为根节点)
+                return null;
+            }
+        }
+    }
+}
+</code></pre>
+
+<h1 id="58">58 对称的二叉树</h1>
+<p>请实现一个函数，用来判断一颗二叉树是不是对称的。注意，如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的。</p>
+<pre><code>public class Solution {
+    boolean isSymmetrical(TreeNode pRoot)
+    {
+        if(pRoot == null){return true;}
+        if(pRoot.left == null &amp;&amp; pRoot.right == null){ return true; }
+        else if(pRoot.left == null &amp;&amp; pRoot.right != null){ return false; }
+        else if(pRoot.left != null &amp;&amp; pRoot.right == null){ return false; }
+        else{
+            return isSym(pRoot.left, pRoot.right);
+        }
+    }
+    boolean isSym(TreeNode left, TreeNode right){
+        if(left == null &amp;&amp; right == null){ return true; }
+        else if(left == null &amp;&amp; right != null){ return false; }
+        else if(left != null &amp;&amp; right == null){ return false; }
+        if(left.val != right.val){
+            return false;
+        }
+        return isSym(left.left, right.right) &amp;&amp; isSym(left.right, right.left);
+    }
+}
+</code></pre>
+
+<h1 id="59">59 按之字形顺序打印二叉树</h1>
+<p>请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。</p>
+<pre><code>import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Solution {
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; Print(TreeNode pRoot) {
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; final_list = new ArrayList&lt;&gt;();
+        if(pRoot == null){return final_list;}
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+
+        queue.offer(pRoot);
+        queue.offer(null);
+        boolean flag = true;
+        ArrayList&lt;Integer&gt; current_list = new ArrayList&lt;&gt;();
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            if(node!=null){
+                if(flag == true){//根据flag来决定插入的顺序
+                    current_list.add(node.val);
+                }else{
+                    current_list.add(0,node.val);
+                }
+                if(node.left!=null){queue.add(node.left);}
+                if(node.right!=null){queue.add(node.right);}
+            }else{//如果队列出列的是设置的null值
+                final_list.add(current_list);
+                current_list = new ArrayList&lt;&gt;();
+                if(flag){flag = false;} else{flag = true;}//修改flag
+                if(!queue.isEmpty()){queue.offer(null);}
+            }
+        }
+        return final_list;
+    }
+
+}
+</code></pre>
+
+<h1 id="60">60 把二叉树打印成多行</h1>
+<p>从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。</p>
+<pre><code>import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Solution {
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; Print(TreeNode pRoot) {
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; final_list = new ArrayList&lt;&gt;();
+        if(pRoot == null){return final_list;}
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+
+        queue.offer(pRoot);
+        queue.offer(null);
+        ArrayList&lt;Integer&gt; current_list = new ArrayList&lt;&gt;();
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            if(node!=null){
+                current_list.add(node.val);
+                if(node.left!=null){queue.add(node.left);}
+                if(node.right!=null){queue.add(node.right);}
+            }else{//如果队列出列的是设置的null值
+                final_list.add(current_list);
+                current_list = new ArrayList&lt;&gt;();
+                if(!queue.isEmpty()){queue.offer(null);}
+            }
+        }
+        return final_list;
+    }
+
+}
+</code></pre>
               
             </div>
           </div>

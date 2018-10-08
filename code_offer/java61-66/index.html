@@ -77,7 +77,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine</a>
+    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
                 </li>
                 <li class="">
                     
@@ -138,6 +138,24 @@
     <a class="current" href="./">Java 61-66</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#61">61 序列化二叉树</a></li>
+    
+
+    <li class="toctree-l3"><a href="#62-k">62 二叉搜索树的第k个结点</a></li>
+    
+
+    <li class="toctree-l3"><a href="#63">63 数据流中的中位数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#64">64 滑动窗口的最大值</a></li>
+    
+
+    <li class="toctree-l3"><a href="#65">65 矩阵中的路径</a></li>
+    
+
+    <li class="toctree-l3"><a href="#66">66 机器人的运动范围</a></li>
+    
+
     </ul>
                 </li>
     </ul>
@@ -179,7 +197,302 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="61">61 序列化二叉树</h1>
+<p>请实现两个函数，分别用来序列化和反序列化二叉树</p>
+<pre><code>public class Solution {
+    String Serialize(TreeNode root) {
+        StringBuffer stringBuffer = new StringBuffer();
+        if(root==null){
+            stringBuffer.append(&quot;#,&quot;);
+            return stringBuffer.toString();
+        }else{
+            stringBuffer.append(root.val+&quot;,&quot;);
+            stringBuffer.append(Serialize(root.left));
+            stringBuffer.append(Serialize(root.right));
+            return stringBuffer.toString();
+        }
+    }
+    int index = -1;//这个index会改变，后面的递归，index会慢慢加
+    TreeNode Deserialize(String str) {
+        index++;
+        System.out.println(&quot;index = &quot;+index);
+        String[] split = str.split(&quot;,&quot;);
+        TreeNode node = null;
+        if(!split[index].equals(&quot;#&quot;)){
+            node = new TreeNode(Integer.parseInt(split[index]));
+            node.left = Deserialize(str);
+            node.right = Deserialize(str);
+        }
+        return node;
+    }
+}
+</code></pre>
+
+<h1 id="62-k">62 二叉搜索树的第k个结点</h1>
+<p>给定一棵二叉搜索树，请找出其中的第k小的结点。例如， （5，3，7，2，4，6，8）    中，按结点数值大小顺序第三小结点的值为4。</p>
+<pre><code>import java.util.ArrayList;
+public class Solution {
+    ArrayList&lt;TreeNode&gt; list = new ArrayList&lt;&gt;();
+    TreeNode KthNode(TreeNode pRoot, int k)
+    {
+        if(k==0){return null;}
+        pre(pRoot);
+        if(k&gt;list.size()){return null;}
+        return list.get(k-1);
+    }
+
+    public void pre(TreeNode pRoot){
+        if(pRoot!=null){
+            pre(pRoot.left);
+            list.add(pRoot);
+            pre(pRoot.right);
+        }
+    }
+}
+</code></pre>
+
+<h1 id="63">63 数据流中的中位数</h1>
+<p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。</p>
+<pre><code>import java.util.ArrayList;
+public class Solution {
+    ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+    public void Insert(Integer num) {
+        boolean flag = false;
+        for(int i=0; i&lt;list.size(); i++){
+            if(list.get(i) &gt; num){
+                list.add(i,num);
+                flag = true;
+                break;
+            }
+        }
+        if(flag == false){list.add(num);}
+    }
+
+    public Double GetMedian() {
+        if(list.size()%2==0){
+            int a = list.get(list.size()/2);
+            int b = list.get(list.size()/2-1);
+            return ((double)a+(double)b)/2;
+        }else{
+            return (double)list.get(list.size()/2);
+        }
+    }
+}
+</code></pre>
+
+<h1 id="64">64 滑动窗口的最大值</h1>
+<p>给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。</p>
+<pre><code>import java.util.ArrayList;
+public class Solution {
+    public ArrayList&lt;Integer&gt; maxInWindows(int [] num, int size)
+    {
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        if(size == 0){ return list;}
+        else if(size == 1){
+            for(int i=0; i&lt;num.length; i++){list.add(num[i]);}
+            return list;
+        }
+        int index = size-1;
+        int max_index = 0;
+        int max = num[max_index];
+        for(; index&lt;num.length; index++){
+            if(index == size-1){//当是第一个滑动窗口的时候，要计算一个当前的最大值，保留最大值的index
+                for(int i=index-size+1; i&lt;=index; i++){
+                    if(num[i] &gt; max){
+                        max = num[i];
+                        max_index = i;
+                    }
+                }
+                //将第一个滑动窗口的最大值加入到list中
+                list.add(max);
+                for(Integer i: list){ System.out.print(i+&quot; &quot;); }System.out.println();
+            }else{
+                if(max_index&gt;=index-size+1 &amp;&amp; num[max_index]&gt;num[index]){
+                    //这个时候max依然是原来的值，max_index也不用替换
+                    list.add(num[max_index]);
+                    for(Integer i: list){ System.out.print(i+&quot; &quot;); }System.out.println();
+                }else if(max_index&gt;=index-size+1 &amp;&amp; num[max_index]==num[index]){
+                    //这个时候max和新进来的数一样，同时保持在滑动窗口内
+                    //虽然一样，max_index还是换一下
+                    max_index = index;
+                    list.add(num[max_index]);
+                    for(Integer i: list){ System.out.print(i+&quot; &quot;); }System.out.println();
+                }else if(num[max_index]&lt;=num[index]){
+                    //无论max是否出了滑动窗口，但是新进来的数是大于它的
+                    //滑动窗口内的其他值都是小于这个值的，那么新进来的这个值一定是最大值
+                    max_index = index;
+                    max = num[max_index];
+                    list.add(num[max_index]);
+                    for(Integer i: list){ System.out.print(i+&quot; &quot;); }System.out.println();
+                }else{
+                    max_index = index-size+1;
+                    max = num[index-size+1];
+                    for(int i=index-size+1; i&lt;=index; i++){
+                        if(num[i] &gt; max){
+                            max = num[i];
+                            max_index = i;
+                        }
+                    }
+                    //将第一个滑动窗口的最大值加入到list中
+                    list.add(max);
+                    for(Integer i: list){ System.out.print(i+&quot; &quot;); }System.out.println();
+                }
+            }
+        }
+        return list;
+    }
+
+}
+</code></pre>
+
+<h1 id="65">65 矩阵中的路径</h1>
+<p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则之后不能再次进入这个格子。 例如 a b c e s f c s a d e e 这样的3 X 4 矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。</p>
+<pre><code>public class Solution {
+    class Path{
+        int row;
+        int col;
+        public Path(int row, int col){
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
+    {
+        if(matrix.length == 0){
+            return false;
+        }else if(str.length == 0){
+            return false;
+        }else{
+            char[][] mat = new char[rows][cols];
+            for(int i=0; i&lt;matrix.length; i++){
+                mat[i/cols][i%cols] = matrix[i];
+            }
+            char first_char = str[0];
+            boolean succeed_flag = false;
+            for(int i=0; i&lt;rows; i++){
+                for(int j=0; j&lt;cols; j++){
+                    if(mat[i][j] == first_char){
+                        int index = 0;
+                        Path[] paths = new Path[str.length];
+                        Path path = new Path(i,j);
+                        paths[index] = path;
+                        if(!succeed_flag){//如果还没有成功，则去寻找
+                            succeed_flag = isCorrect(mat,paths,index,str);
+                        }
+                    }
+                }
+            }
+            return succeed_flag;
+        }
+    }
+    public boolean isCorrect(char[][] mat, Path[] paths, int index, char[] str){
+        if(index+1 &gt; str.length-1){
+            return true;
+        }
+        int rows = mat.length;
+        int cols = mat[0].length;
+        //寻找index的下一个节点，满足条件：
+        //是index节点的上下左右。不越界。是当前要找的index+1的符号。不存在于已经在path中的节点中。
+        //如果没有找到就返回false
+        Path last_path = paths[index];
+
+        int x = last_path.row;
+        int y = last_path.col;
+
+        boolean down = false;
+        boolean up = false;
+        boolean right = false;
+        boolean left = false;
+
+        if(x+1 &lt; rows &amp;&amp; mat[x+1][y] == str[index+1] &amp;&amp; canGo(paths, x+1, y, index)){
+            Path path = new Path(x+1, y);
+            paths[index+1] = path;
+            down = isCorrect(mat,paths,index+1,str);
+        }
+        if(x-1 &gt;= 0 &amp;&amp; mat[x-1][y] == str[index+1] &amp;&amp; canGo(paths, x-1, y, index)){
+            Path path = new Path(x-1, y);
+            paths[index+1] = path;
+            up =  isCorrect(mat,paths,index+1,str);
+        }
+        if(y+1 &lt; cols &amp;&amp; mat[x][y+1] == str[index+1] &amp;&amp; canGo(paths, x, y+1, index)){
+            Path path = new Path(x, y+1);
+            paths[index+1] = path;
+            right = isCorrect(mat,paths,index+1,str);
+        }
+        if(y-1 &gt;= 0 &amp;&amp; mat[x][y-1] == str[index+1] &amp;&amp; canGo(paths, x, y-1, index)){
+            Path path = new Path(x, y-1);
+            paths[index+1] = path;
+            left = isCorrect(mat,paths,index+1,str);
+        }
+        return down || up || right || left;
+    }
+    public boolean canGo(Path[] paths, int x, int y, int index){
+        for(int i=0; i&lt;=index; i++){
+            if(x == paths[i].row &amp;&amp; y == paths[i].col){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
+
+<h1 id="66">66 机器人的运动范围</h1>
+<p>地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？</p>
+<pre><code>public class Solution {
+    int count = 0;
+    public int movingCount(int threshold, int rows, int cols)
+    {
+        if(threshold &lt; 0){return 0;}
+        if(threshold == 0){return 1;}
+        if(rows == 0 || cols == 0){return 0;}
+
+        boolean[][] visited = new boolean[rows][cols];
+        visited[0][0] = true;
+        ++count;
+
+        go(threshold, visited, 0, 0);
+
+        return count;
+    }
+    public void go(int threshold, boolean[][] visited, int x, int y){
+        int rows = visited.length;
+        int cols = visited[0].length;
+        boolean down = false;
+        boolean right = false;
+        //只需要往下和往右走（往上和往左是退回，但是退回之后走的路，一定在这之前可以走），可以走的条件：
+        //往下和往右不超过边界，visited为false，满足threshold
+        if(x+1&lt;rows &amp;&amp; visited[x+1][y] == false &amp;&amp; can(threshold, x+1, y)){
+            visited[x+1][y] = true;
+            ++count;
+            go(threshold, visited,x+1, y);
+        }
+        if(y+1&lt;cols &amp;&amp; visited[x][y+1] == false &amp;&amp; can(threshold, x, y+1)){
+            visited[x][y+1] = true;
+            ++count;
+            go(threshold, visited, x, y+1);
+        }
+    }
+
+    public boolean can(int threshold, int x, int y){
+        char[] chars_x = String.valueOf(x).toCharArray();
+        char[] chars_y = String.valueOf(y).toCharArray();
+        int n = 0;
+        for(int i=0; i&lt;chars_x.length; i++){
+            n = n + chars_x[i] - 48;
+        }
+        for(int i=0; i&lt;chars_y.length; i++){
+            n = n + chars_y[i] - 48;
+        }
+        if(n&lt;=threshold){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+</code></pre>
               
             </div>
           </div>

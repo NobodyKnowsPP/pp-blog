@@ -77,7 +77,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine</a>
+    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
                 </li>
                 <li class="">
                     
@@ -126,6 +126,36 @@
     <a class="current" href="./">Java 31-40</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#31-11n1">31 整数中1出现的次数（从1到n整数中1出现的次数）</a></li>
+    
+
+    <li class="toctree-l3"><a href="#32">32 把数组排成最小的数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#33">33 丑数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#34">34 第一个只出现一次的字符</a></li>
+    
+
+    <li class="toctree-l3"><a href="#35">35 数组中的逆序对</a></li>
+    
+
+    <li class="toctree-l3"><a href="#36">36 两个链表的第一个公共结点</a></li>
+    
+
+    <li class="toctree-l3"><a href="#37">37 数字在排序数组中出现的次数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#38">38 二叉树的深度</a></li>
+    
+
+    <li class="toctree-l3"><a href="#39">39 平衡二叉树</a></li>
+    
+
+    <li class="toctree-l3"><a href="#40">40 数组中只出现了一次的数字</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -179,7 +209,366 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="31-11n1">31 整数中1出现的次数（从1到n整数中1出现的次数）</h1>
+<p>求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。</p>
+<pre><code>public class Solution {
+    public int NumberOf1Between1AndN_Solution(int n) {
+        int sum = 0;
+        int count = 0;
+        for(int i=1; i&lt;=n; i++){
+            String s = String.valueOf(i);
+            char[] chars = s.toCharArray();
+            for(int j=0; j&lt;chars.length; j++){
+                if(chars[j] == '1'){
+                    ++count;
+                }
+            }
+        }
+        return count;
+    }
+}
+</code></pre>
+
+<h1 id="32">32 把数组排成最小的数</h1>
+<p>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。</p>
+<pre><code>import java.util.ArrayList;
+
+public class Solution {
+    public String PrintMinNumber(int [] numbers) {
+        String s = &quot;&quot;;
+        if(numbers.length==0){return s;}
+
+        String[] arr = new String[numbers.length];
+        for(int i=0; i&lt;numbers.length; i++){
+            arr[i] = String.valueOf(numbers[i]);
+        }
+
+        mergeSort(arr, 0, arr.length);
+
+        for(int i=0; i&lt;arr.length; i++){
+            s += arr[i];
+        }
+        return s;
+    }
+
+    public void mergeSort(String[] arr, int start, int end){
+        if(end-start &gt; 1){
+            int new_start = start;
+            int new_end = end;
+            mergeSort(arr, new_start, (new_end-new_start+1)/2+new_start);
+            mergeSort(arr, (new_end-new_start+1)/2+new_start, new_end);
+
+            int front_index = start;
+            int back_index = (end-start+1)/2+start;
+            while(back_index != end &amp;&amp; back_index != front_index){
+                if(isBigger(arr[front_index], arr[back_index])){
+                    String temp = arr[back_index];
+                    for(int i=back_index; i&gt;front_index; i--){
+                        arr[i] = arr[i-1];
+                    }
+                    arr[front_index] = temp;
+                    ++back_index;
+                    ++front_index;
+                }else{
+                    ++front_index;
+                }
+            }
+        }
+    }
+
+    public boolean isBigger(String s1, String s2){
+        boolean big_flag = false;
+        int longer_len = s1.length();
+        if(s2.length() &gt; longer_len){longer_len = s2.length();}
+
+        for(int i=0; i&lt;longer_len; i++){
+            if(s1.charAt(i % s1.length()) &gt; s2.charAt(i % s2.length())){
+                big_flag = true;
+            }else if(s1.charAt(i % s1.length()) &lt; s2.charAt(i % s2.length())){
+            }
+        }
+        return big_flag;
+    }
+}
+</code></pre>
+
+<h1 id="33">33 丑数</h1>
+<p>把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。</p>
+<pre><code>import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+public class Solution {
+    public int GetUglyNumber_Solution(int index) {
+        if(index == 0){return 0;}
+        else if(index == 1){return 1;}
+        int[] arr = new int[index];
+        Queue&lt;Integer&gt; q2 = new LinkedList&lt;&gt;();
+        Queue&lt;Integer&gt; q3 = new LinkedList&lt;&gt;();
+        Queue&lt;Integer&gt; q5 = new LinkedList&lt;&gt;();
+        q2.offer(2);
+        q3.offer(3);
+        q5.offer(5);
+        for(int i=1; i&lt;index; i++){
+            int min = Math.min(q2.element(),Math.min(q3.element(), q5.element()));
+            if(q2.element() == min){q2.poll();}
+            if(q3.element() == min){q3.poll();}
+            if(q5.element() == min){q5.poll();}
+            arr[i] = min;
+            q2.offer(min * 2);
+            q3.offer(min * 3);
+            q5.offer(min * 5);
+        }
+        return arr[index-1];
+    }
+}
+</code></pre>
+
+<h1 id="34">34 第一个只出现一次的字符</h1>
+<p>在一个字符串(0&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.</p>
+<pre><code>import java.util.ArrayList;
+import java.util.HashMap;
+public class Solution {
+    public class Element{
+        int first_index;
+        int count;
+
+        public Element(int index){
+            first_index = index;
+            count = 1;
+        }
+        public void add(){
+            count = count+1;
+        }
+    }
+
+    public int FirstNotRepeatingChar(String str) {
+        char[] chars = str.toCharArray();
+        HashMap&lt;Character, Element&gt; map = new HashMap&lt;&gt;();
+        ArrayList&lt;Character&gt; char_order = new ArrayList&lt;&gt;();
+        for(int i=0; i&lt;chars.length; i++){
+            if(map.get(chars[i]) == null){
+                Element e = new Element(i);
+                map.put(chars[i], e);
+                char_order.add(chars[i]);
+            }else{
+                map.get(chars[i]).add();
+            }
+        }
+        for(int i=0; i&lt;char_order.size(); i++){
+            if(map.get(char_order.get(i)).count == 1){
+                return map.get(char_order.get(i)).first_index;
+            }
+        }
+        return -1;
+    }
+}
+</code></pre>
+
+<h1 id="35">35 数组中的逆序对</h1>
+<p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007</p>
+<p>输入描述:</p>
+<p>题目保证输入的数组中没有的相同的数字</p>
+<p>数据范围：</p>
+<pre><code>对于%50的数据,size&lt;=10^4
+
+对于%75的数据,size&lt;=10^5
+
+对于%100的数据,size&lt;=2*10^5
+</code></pre>
+<pre><code>public class Solution {
+    long count = 0;
+
+    public int InversePairs(int [] array) {
+        mergeSort(array, 0, array.length);
+        return (int)(count % 1000000007);
+    }
+
+    public void mergeSort(int[] arr, int start, int end){
+        if(end-start &gt; 1){
+            mergeSort(arr, start, (end-start+1)/2+start);
+            mergeSort(arr, (end-start+1)/2+start, end);
+
+            int front_index = start;
+            int back_index = (end-start+1)/2+start;
+
+            int[] temp_arr = new int[end-start];
+            int temp_i = 0;
+            while(back_index != end &amp;&amp; front_index != (end-start+1)/2+start){
+
+                if(arr[back_index] &lt; arr[front_index]){
+                    temp_arr[temp_i] = arr[back_index];
+                    count = count + back_index - start - temp_i;
+                    ++back_index;
+                }else{
+                    temp_arr[temp_i] = arr[front_index];
+                    ++front_index;
+                }
+                ++temp_i;
+            }
+            if(back_index!=end)
+            {
+                for(--temp_i; temp_i&gt;-1;temp_i--){
+                    arr[temp_i+start] = temp_arr[temp_i];
+                }
+            }else{
+                for(; temp_i&lt;(end-start); temp_i++)
+                {
+                    temp_arr[temp_i] = arr[front_index];
+                    ++front_index;
+                }
+                for(int i=0; i&lt;temp_arr.length; i++){
+                    arr[i+start] = temp_arr[i];
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+<h1 id="36">36 两个链表的第一个公共结点</h1>
+<p>输入两个链表，找出它们的第一个公共结点。</p>
+<pre><code>import java.util.Stack;
+public class Solution {
+    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+        ListNode target = null;
+        Stack&lt;ListNode&gt; s1 = new Stack&lt;&gt;();
+        Stack&lt;ListNode&gt; s2 = new Stack&lt;&gt;();
+        while(pHead1!=null){
+            s1.push(pHead1);
+            pHead1 = pHead1.next;
+        }
+        while(pHead2!=null){
+            s2.push(pHead2);
+            pHead2 = pHead2.next;
+        }
+        while(!s1.empty() &amp;&amp; !s2.empty()){
+            if(s1.peek() == s2.peek()){
+                target = s1.peek();
+                s1.pop();
+                s2.pop(); 
+            }else{
+                return target;
+            }
+        }
+        return target;
+    }
+}
+</code></pre>
+
+<h1 id="37">37 数字在排序数组中出现的次数</h1>
+<p>统计一个数字在排序数组中出现的次数。</p>
+<pre><code>public class Solution {
+    public int GetNumberOfK(int [] array , int k) {
+        if(array.length==0){
+            return 0;
+        }
+        int count = 0;
+        int start = 0;
+        int end = array.length-1;
+        while(end-start &gt;= 0){
+            int mid = (start + end)/2;
+            if(array[mid] &gt; k){
+                end = mid-1;
+            }else if(array[mid] &lt; k){
+                start = mid+1;
+            }else{
+                ++count;
+                for(int i=mid-1; i&gt;-1; i--){
+                    if(array[i] == k){
+                        ++count;
+                    }else{
+                        break;
+                    }
+                }
+                for(int i=mid+1; i&lt;array.length; i++){
+                    if(array[i] == k){
+                        ++count;
+                    }else{
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        return count;
+    }
+}
+</code></pre>
+
+<h1 id="38">38 二叉树的深度</h1>
+<p>输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。</p>
+<pre><code>public class Solution {
+    public int TreeDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }else{
+            int left_depth = TreeDepth(root.left);
+            int right_depth = TreeDepth(root.right);
+            return left_depth &gt;= right_depth ? left_depth+1 : right_depth+1;
+        }
+    }
+}
+</code></pre>
+
+<h1 id="39">39 平衡二叉树</h1>
+<p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
+<pre><code>public class Solution {
+    boolean flag = true;
+
+    public boolean IsBalanced_Solution(TreeNode root) {
+        get_depth(root);
+        return flag;
+    }
+
+    public int get_depth(TreeNode root){
+        if(root == null){
+            return 0;
+        }else{
+            int left_d = get_depth(root.left);
+            int right_d = get_depth(root.right);
+            if(left_d-right_d!=-1 &amp;&amp; left_d-right_d!=1 &amp;&amp; left_d-right_d!=0){
+                flag = false;
+            }
+            return left_d &gt;= right_d ? left_d+1 : right_d+1;
+        }
+    }
+}
+</code></pre>
+
+<h1 id="40">40 数组中只出现了一次的数字</h1>
+<p>一个整型数组里除了两个数字之外，其他的数字都出现了偶数次。请写程序找出这两个只出现一次的数字。</p>
+<pre><code>//num1,num2分别为长度为1的数组。传出参数
+//将num1[0],num2[0]设置为返回结果
+public class Solution {
+    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) {
+        if(array.length == 2){
+            num1[0] = array[0];
+            num2[0] = array[0];
+        }else{
+            int n = array[0];
+            for(int i=1; i&lt;array.length; i++){
+                n = n ^ array[i];
+            }
+
+            int first1_index = 0;
+            while((n&amp;1) == 0 &amp;&amp; first1_index &lt; 32){
+                n = n &gt;&gt; 1;
+                ++first1_index;
+            }
+
+            num1[0] = 0;
+            num2[0] = 0;
+            for(int i=0; i&lt;array.length; i++) {
+                if (((array[i] &gt;&gt; first1_index) &amp; 1) == 0) {
+                    num1[0] = num1[0] ^ array[i];
+                } else {
+                    num2[0] = num2[0] ^ array[i];
+                }
+            }
+        }
+    }
+}
+</code></pre>
               
             </div>
           </div>
