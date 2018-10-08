@@ -114,6 +114,17 @@
     <a class="current" href="./">Java 1-10</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#problem-1">Problem 1:</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#description">Description:</a></li>
+        
+            <li><a class="toctree-l4" href="#solution">Solution:</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -179,7 +190,32 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="problem-1">Problem 1:</h1>
+<h2 id="description">Description:</h2>
+<p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<h2 id="solution">Solution:</h2>
+<pre><code>public class Solution {
+    public boolean Find(int target, int [][] array)
+    {
+        boolean flag = false;
+        for(int i=0; i&lt;array.length; i++)
+        {
+            for(int j=0; j&lt;array[0].length; j++)
+            {
+                if(array[i][j] &lt; target)
+                {
+                    continue;
+                }else if(array[i][j] &gt; target){
+                    break;
+                }else{
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+}
+</code></pre>
               
             </div>
           </div>

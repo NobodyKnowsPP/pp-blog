@@ -127,8 +127,23 @@
         },
         {
             "location": "/code_offer/java1-10/",
-            "text": "",
+            "text": "Problem 1:\n\n\nDescription:\n\n\n\u5728\u4e00\u4e2a\u4e8c\u7ef4\u6570\u7ec4\u4e2d\uff08\u6bcf\u4e2a\u4e00\u7ef4\u6570\u7ec4\u7684\u957f\u5ea6\u76f8\u540c\uff09\uff0c\u6bcf\u4e00\u884c\u90fd\u6309\u7167\u4ece\u5de6\u5230\u53f3\u9012\u589e\u7684\u987a\u5e8f\u6392\u5e8f\uff0c\u6bcf\u4e00\u5217\u90fd\u6309\u7167\u4ece\u4e0a\u5230\u4e0b\u9012\u589e\u7684\u987a\u5e8f\u6392\u5e8f\u3002\u8bf7\u5b8c\u6210\u4e00\u4e2a\u51fd\u6570\uff0c\u8f93\u5165\u8fd9\u6837\u7684\u4e00\u4e2a\u4e8c\u7ef4\u6570\u7ec4\u548c\u4e00\u4e2a\u6574\u6570\uff0c\u5224\u65ad\u6570\u7ec4\u4e2d\u662f\u5426\u542b\u6709\u8be5\u6574\u6570\u3002\n\n\nSolution:\n\n\npublic class Solution {\n    public boolean Find(int target, int [][] array)\n    {\n        boolean flag = false;\n        for(int i=0; i<array.length; i++)\n        {\n            for(int j=0; j<array[0].length; j++)\n            {\n                if(array[i][j] < target)\n                {\n                    continue;\n                }else if(array[i][j] > target){\n                    break;\n                }else{\n                    flag = true;\n                }\n            }\n        }\n        return flag;\n    }\n}",
             "title": "Java 1-10"
+        },
+        {
+            "location": "/code_offer/java1-10/#problem-1",
+            "text": "",
+            "title": "Problem 1:"
+        },
+        {
+            "location": "/code_offer/java1-10/#description",
+            "text": "\u5728\u4e00\u4e2a\u4e8c\u7ef4\u6570\u7ec4\u4e2d\uff08\u6bcf\u4e2a\u4e00\u7ef4\u6570\u7ec4\u7684\u957f\u5ea6\u76f8\u540c\uff09\uff0c\u6bcf\u4e00\u884c\u90fd\u6309\u7167\u4ece\u5de6\u5230\u53f3\u9012\u589e\u7684\u987a\u5e8f\u6392\u5e8f\uff0c\u6bcf\u4e00\u5217\u90fd\u6309\u7167\u4ece\u4e0a\u5230\u4e0b\u9012\u589e\u7684\u987a\u5e8f\u6392\u5e8f\u3002\u8bf7\u5b8c\u6210\u4e00\u4e2a\u51fd\u6570\uff0c\u8f93\u5165\u8fd9\u6837\u7684\u4e00\u4e2a\u4e8c\u7ef4\u6570\u7ec4\u548c\u4e00\u4e2a\u6574\u6570\uff0c\u5224\u65ad\u6570\u7ec4\u4e2d\u662f\u5426\u542b\u6709\u8be5\u6574\u6570\u3002",
+            "title": "Description:"
+        },
+        {
+            "location": "/code_offer/java1-10/#solution",
+            "text": "public class Solution {\n    public boolean Find(int target, int [][] array)\n    {\n        boolean flag = false;\n        for(int i=0; i<array.length; i++)\n        {\n            for(int j=0; j<array[0].length; j++)\n            {\n                if(array[i][j] < target)\n                {\n                    continue;\n                }else if(array[i][j] > target){\n                    break;\n                }else{\n                    flag = true;\n                }\n            }\n        }\n        return flag;\n    }\n}",
+            "title": "Solution:"
         },
         {
             "location": "/code_offer/java11-20/",
