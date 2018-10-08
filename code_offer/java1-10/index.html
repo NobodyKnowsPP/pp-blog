@@ -125,6 +125,17 @@
         </ul>
     
 
+    <li class="toctree-l3"><a href="#problem-2">Problem 2:</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#desription">Desription:</a></li>
+        
+            <li><a class="toctree-l4" href="#solution_1">Solution:</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -213,6 +224,17 @@
             }
         }
         return flag;
+    }
+}
+</code></pre>
+
+<h1 id="problem-2">Problem 2:</h1>
+<h2 id="desription">Desription:</h2>
+<p>请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。</p>
+<h2 id="solution_1">Solution:</h2>
+<pre><code>public class Solution {
+    public String replaceSpace(StringBuffer str) {
+        return str.toString().replaceAll(&quot; &quot;,&quot;%20&quot;);
     }
 }
 </code></pre>
