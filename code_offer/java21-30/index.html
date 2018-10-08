@@ -122,6 +122,36 @@
     <a class="current" href="./">Java 21-30</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#21">21 栈的压入、弹出序列</a></li>
+    
+
+    <li class="toctree-l3"><a href="#22">22 从上往下打印二叉树</a></li>
+    
+
+    <li class="toctree-l3"><a href="#23">23 二叉搜索树的后序遍历序列</a></li>
+    
+
+    <li class="toctree-l3"><a href="#24">24 二叉树中和为某一值的路径</a></li>
+    
+
+    <li class="toctree-l3"><a href="#25">25 复杂链表的复制</a></li>
+    
+
+    <li class="toctree-l3"><a href="#26">26 二叉搜索树与双向链表</a></li>
+    
+
+    <li class="toctree-l3"><a href="#27">27 字符串的排列</a></li>
+    
+
+    <li class="toctree-l3"><a href="#28">28 数组中出现次数超过一半的数字</a></li>
+    
+
+    <li class="toctree-l3"><a href="#29-k">29 最小的k个数</a></li>
+    
+
+    <li class="toctree-l3"><a href="#30">30 连续子数组的最大和</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -179,7 +209,499 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="21">21 栈的压入、弹出序列</h1>
+<p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否可能为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4,5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+<pre><code>import java.util.ArrayList;
+
+public class Solution {
+    public boolean IsPopOrder(int [] pushA,int [] popA) {
+        int[] seq = new int[pushA.length];
+        for(int i=0; i&lt;popA.length; i++)
+        {
+            boolean find_flag = false;
+            for (int j = 0; j &lt; pushA.length; j++) {
+                if (popA[i] == pushA[j]) {
+                    seq[i] = j;
+                    find_flag = true;
+                    break;
+                }
+            }
+            if(find_flag == false)
+            {
+                return false;
+            }
+        }
+
+        for(int i=0; i&lt;seq.length-1; i++)
+        {
+            ArrayList&lt;Integer&gt; temp = new ArrayList&lt;&gt;();
+            for(int j=0; j&lt;seq[i]; j++)
+            {
+                temp.add(j);
+            }
+
+            if(i==0)
+            {
+                if(seq[i+1] &lt; temp.get(temp.size()-1)){return false;}
+                else{continue;}
+            }else{
+                for(int j=0; j&lt;i; j++)
+                {
+                    temp.remove((Integer)seq[j]);
+                }
+                if(seq[i+1]&lt;temp.get(temp.size()-1)){return false;}
+                else{continue;}
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
+
+<h1 id="22">22 从上往下打印二叉树</h1>
+<p>从上往下打印出二叉树的每个节点，同层节点从左至右打印。</p>
+<pre><code>import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Solution {
+    public ArrayList&lt;Integer&gt; PrintFromTopToBottom(TreeNode root)
+    {
+        ArrayList&lt;Integer&gt; arr = new ArrayList();
+        Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();
+        q.offer(root);
+        while((root = q.poll()) != null)
+        {
+            arr.add(root.val);
+            if(root.left != null){q.offer(root.left);}
+            if(root.right != null){q.offer(root.right);}
+
+        }
+        return arr;
+    }
+}
+</code></pre>
+
+<h1 id="23">23 二叉搜索树的后序遍历序列</h1>
+<p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p>
+<pre><code>public class Solution {
+    public boolean VerifySquenceOfBST(int [] sequence)
+    {
+        if(sequence.length == 0)
+        {
+            return false;
+        }else{
+            return check(sequence);
+        }
+    }
+
+    public boolean check(int [] sequence)
+    {
+        if(sequence.length == 0)
+        {
+            return true;
+        }else{
+            int mid = sequence[sequence.length-1];
+            int front_length = 0;
+
+            for(int i=0; i&lt;sequence.length-1; i++)
+            {
+                if(sequence[i] &gt; mid)
+                {
+                    break;
+                }else{
+                    ++front_length;
+                }
+            }
+            int[] front_half = new int[front_length];
+            int[] back_half = new int[sequence.length-1-front_length];
+            for(int i=0; i&lt;front_length; i++)
+            {
+                front_half[i] = sequence[i];
+            }
+            for(int i=0; i&lt;back_half.length; i++)
+            {
+                if(sequence[i+front_length] &lt; mid){return false;}
+                else{
+                    back_half[i] = sequence[i+front_length];
+                }
+            }
+            return check(front_half) &amp;&amp; check(back_half);
+        }
+    }
+
+}
+</code></pre>
+
+<h1 id="24">24 二叉树中和为某一值的路径</h1>
+<p>输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。(注意: 在返回值的list中，数组长度大的数组靠前)</p>
+<pre><code>import java.util.ArrayList;
+import java.util.Stack;
+
+public class Solution {
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindPath(TreeNode root,int target) {
+        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; final_list = new ArrayList&lt;&gt;();
+        if(root == null){
+            return final_list;
+        }else{
+            ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+            search(final_list,root,list,0,target);
+            return final_list;
+        }
+    }
+
+    public void search(ArrayList&lt;ArrayList&lt;Integer&gt;&gt; final_list, TreeNode root,
+                                     ArrayList&lt;Integer&gt; current_list, int current_sum, int target)
+    {
+
+        if(root.left == null &amp;&amp; root.right == null) {
+            if((current_sum+root.val) == target)
+            {
+                current_list.add(root.val);
+                current_sum += root.val;
+                final_list.add(current_list);
+            }
+        }else
+        {
+            current_list.add(root.val);
+            current_sum += root.val;
+
+            if(root.left!=null &amp;&amp; root.right==null)
+            {search(final_list,root.left,current_list,current_sum,target);}
+            else if(root.left==null &amp;&amp; root.right!=null)
+            {search(final_list,root.right,current_list,current_sum,target);}
+            else{
+                ArrayList&lt;Integer&gt; copy_current_list = copy(current_list);
+                search(final_list,root.left,current_list,current_sum,target);
+                search(final_list,root.right,copy_current_list,current_sum,target);
+            }
+        }
+    }
+
+    public ArrayList&lt;Integer&gt; copy(ArrayList&lt;Integer&gt; arr)
+    {
+        ArrayList&lt;Integer&gt; new_arr = new ArrayList&lt;&gt;();
+        for(Integer i: arr){
+            new_arr.add(i);
+        }
+        return new_arr;
+    }
+}
+</code></pre>
+
+<h1 id="25">25 复杂链表的复制</h1>
+<p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+<pre><code>public class Solution {
+    public RandomListNode Clone(RandomListNode pHead)
+    {
+        if(pHead == null){
+            return null;
+        }else{
+            RandomListNode p = pHead;
+
+            do{
+                RandomListNode node = new RandomListNode(p.label);
+                node.next = p.next;
+                p.next = node;
+                p = p.next.next;
+            }while(p != null);
+
+            p = pHead;
+            do{
+                if(p.random != null)
+                {
+                    p.next.random = p.random.next;
+                }else{
+                    p.next.random = null;
+                }
+                p = p.next.next;
+            }while(p != null);
+
+            p = pHead;
+            RandomListNode q = pHead.next;
+            RandomListNode remain_head = q;
+
+            while (q.next != null)
+            {
+                p.next = q.next;
+                q.next = q.next.next;
+
+                p = p.next;
+                q = q.next;
+            }
+            p.next = null;
+
+            return remain_head;
+        }
+    }
+}
+</code></pre>
+
+<h1 id="26">26 二叉搜索树与双向链表</h1>
+<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。</p>
+<pre><code>import java.util.Stack;
+public class Solution {
+    public TreeNode Convert(TreeNode pRootOfTree)
+    {
+        if(pRootOfTree == null){
+            return null;
+        }else{
+            TreeNode p = pRootOfTree;
+            TreeNode pre = pRootOfTree;
+            Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();
+            while(p.left!=null){
+                stack.push(p);
+                p = p.left;
+            }
+            pRootOfTree = p;//head node
+            pre = null;
+            while(p != null || !stack.empty()){
+                while(p!=null){
+                    stack.push(p);
+                    p = p.left;
+                }
+                p = stack.pop();
+
+                p.left = pre;
+                if(pre != null){
+                    pre.right = p;
+                }
+
+                pre = p;
+                p = p.right;
+
+            }
+        }
+        return pRootOfTree;
+    }
+}
+</code></pre>
+
+<h1 id="27">27 字符串的排列</h1>
+<p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<pre><code>import java.util.ArrayList;
+import java.util.Collections;
+public class Solution {
+    public ArrayList&lt;String&gt; Permutation(String str) {
+        ArrayList&lt;String&gt; final_list = new ArrayList&lt;&gt;();
+        if(str.equals(&quot;&quot;)){return final_list;}
+
+        char[] arr = str.toCharArray();
+
+        ArrayList&lt;Character&gt; char_list = new ArrayList&lt;&gt;();
+        for(int i=0; i&lt;arr.length; i++){
+            char_list.add(arr[i]);
+        }
+        Collections.sort(char_list);
+
+        char[] init_char_arr = new char[char_list.size()];
+        for(int i=0; i&lt;char_list.size(); i++){
+            init_char_arr[i] = char_list.get(i);
+        }
+        final_list.add(make_string(init_char_arr));
+        add_string(final_list, init_char_arr, 0);
+        Collections.sort(final_list);
+
+        return final_list;
+    }
+
+    public void add_string(ArrayList&lt;String&gt; final_list, char[] char_arr, int index){
+        if(index &lt; char_arr.length-1){
+            add_string(final_list,char_arr,index+1);
+
+            for(int i=index+1; i&lt;char_arr.length; i++){
+                if(char_arr[index] != char_arr[i]){
+                    char[] new_char_arr = copy_char_arr(char_arr);
+                    char temp = new_char_arr[index];
+                    new_char_arr[index] = new_char_arr[i];
+                    new_char_arr[i] = temp;
+                    final_list.add(make_string(new_char_arr));
+                    add_string(final_list, new_char_arr, index+1);
+                }
+            }
+        }
+    }
+
+    public char[] copy_char_arr(char[] arr){
+        char[] new_arr = new char[arr.length];
+        for(int i=0; i&lt;arr.length; i++){
+            new_arr[i] = arr[i];
+        }
+        return new_arr;
+    }
+
+    public String make_string(char[] char_arr){
+        String s = &quot;&quot;;
+        for(int i=0; i&lt;char_arr.length; i++){
+            s += char_arr[i];
+        }
+        return s;
+    }
+}
+</code></pre>
+
+<h1 id="28">28 数组中出现次数超过一半的数字</h1>
+<p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。</p>
+<pre><code>import java.util.HashMap;
+public class Solution {
+    public int MoreThanHalfNum_Solution(int [] array) {
+        HashMap&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();
+        for(int i=0; i&lt;array.length; i++){
+            if(map.get(array[i])!=null){
+                map.put(array[i], map.get(array[i])+1);
+            }else{
+                map.put(array[i], 1);
+            }
+        }
+        for(Integer k: map.keySet()){
+            if(map.get(k) &gt; array.length/2){
+                return k;
+            }
+        }
+        return 0;
+    }
+}
+</code></pre>
+
+<h1 id="29-k">29 最小的k个数</h1>
+<p>输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。</p>
+<pre><code>import java.util.ArrayList;
+public class Solution {
+    public ArrayList&lt;Integer&gt; GetLeastNumbers_Solution(int [] input, int k) {
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        if(input.length == 0){
+            return list;
+        }
+        heapSort(list, input, input.length, k);
+        return list;
+    }
+
+    public void heapSort(ArrayList&lt;Integer&gt; list, int[] input, int len, int k){
+        if(len &gt; input.length-k &amp;&amp; k &lt;= input.length){
+            int temp;
+            int index = len/2-1;
+            for(int i=index; i&gt;-1; i--){
+                int remain_i = i;
+                boolean exchange_flag = false;
+                int min_index = -1;
+                if(i*2+2 &lt; len){
+                    min_index = input[i*2+1] &lt; input[i*2+2] ? i*2+1 : i*2+2;
+                }else{
+                    min_index = i*2+1;
+                }
+
+                if(input[i] &gt; input[min_index]){
+                    exchange_flag = true;
+                    temp = input[i];//exchange
+                    input[i] = input[min_index];
+                    input[min_index] = temp;
+                }
+                while(exchange_flag == true){
+                    i = min_index;
+                    if(i*2+2 &lt; len){
+                        min_index = input[i*2+1] &lt; input[i*2+2] ? i*2+1 : i*2+2;
+                        if(input[i] &gt; input[min_index]){
+                            temp = input[i];//exchange
+                            input[i] = input[min_index];
+                            input[min_index] = temp;
+                        }else{
+                            exchange_flag = false;
+                        }
+                    }else if(i*2+1 &lt; len){
+                        min_index = i*2+1;
+                        if(input[i] &gt; input[min_index]){
+                            temp = input[i];//exchange
+                            input[i] = input[min_index];
+                            input[min_index] = temp;
+                        }else{
+                            exchange_flag = false;
+                        }
+                    }else{
+                        exchange_flag = false;
+                    }
+                }
+                i = remain_i;
+            }
+            int min = input[0];
+            input[0] = input[len-1];
+            input[len-1] = min;
+            list.add(min);
+            heapSort(list,input,len-1,k);
+        }
+    }
+}
+</code></pre>
+
+<h1 id="30">30 连续子数组的最大和</h1>
+<p>HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)</p>
+<pre><code>public class Solution {
+    public int FindGreatestSumOfSubArray(int[] array)
+    {
+        int max = 0;
+        for(int i=0; i&lt;array.length; i++){
+            if(array[i]&lt;0){
+                continue;
+            }
+            int sum = array[i];
+            int neg = 0;
+            for(int j=i-1; j&gt;-1; j--){
+                System.out.println(&quot;j = &quot;+j);
+                if(array[j]&gt;=0){
+                    sum += array[j];
+                }else{
+                    neg = array[j];
+                    int comple = 0;
+                    for(int k=j-1; k&gt;-1; k--){
+                        if(neg+array[k]&lt;comple){
+                            neg = neg+array[k];
+                        }else{
+                            comple = neg+array[k];
+                            neg = neg+array[k];
+                        }
+                    }
+                    sum = sum + comple;
+                    break;
+                }
+            }
+
+            neg = 0;
+            for(int j=i+1; j&lt;array.length; j++){
+                System.out.println(&quot;j = &quot;+j);
+                if(array[j]&gt;=0){
+                    sum += array[j];
+                }else{
+                    neg = array[j];
+                    int comple = 0;
+                    for(int k=j+1; k&lt;array.length; k++){
+                        if(neg+array[k]&lt;comple){
+                            neg = neg+array[k];
+                        }else{
+                            comple = neg+array[k];
+                            neg = neg+array[k];
+                        }
+                    }
+                    sum = sum + comple;
+                    break;
+                }
+            }
+
+            if(sum &gt; max){
+                max = sum;
+            }
+        }
+        if(max == 0){
+            max = array[0];
+            for(int i=1; i&lt;array.length; i++){
+                if(array[i]&gt;max){
+                    max = array[i];
+                }
+            }
+        }
+
+        return max;
+    }
+}
+</code></pre>
               
             </div>
           </div>
