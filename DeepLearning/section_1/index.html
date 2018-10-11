@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Chapter 1 - PP's Notes</title>
+  <title>Section 1 - PP's Notes</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Chapter 1";
+    var mkdocs_page_name = "Section 1";
     var mkdocs_page_input_path = "DeepLearning/section_1.md";
     var mkdocs_page_url = "/DeepLearning/section_1/";
   </script>
@@ -96,7 +96,7 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Chapter 1</a>
+    <a class="current" href="./">Section 1</a>
     <ul class="subnav">
             
     <li class="toctree-l3"><a href="#_1">第二章 线性代数</a></li>
@@ -178,7 +178,7 @@
         
       
     
-    <li>Chapter 1</li>
+    <li>Section 1</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -195,6 +195,14 @@
 <p>离散型随机变量的概率分布用概率质量函数(probability mass function, PMF)来表述。用P表示概率质量函数。</p>
 <p>连续型随机变量的概率分布用概率密度函数(probability density function, PDF)来描述。用p表示。</p>
 <h1 id="_3">第四章 数值计算</h1>
+<p>4.1 上溢和下溢</p>
+<p>必须对上溢和下溢进行数值稳定的例子是softmax函数。softmax函数经常用语预测与Multinoulli分布相关联的概率。</p>
+<p>$$softmax(\textbf{x})<em>i=\frac{exp(x_i)}{\sum</em>{j=1}^n exp(x_j)}$$</p>
+<p>在某些情况下，我们可能在实现一个新的算法是自动保持数值的稳定。比如Theano软件包，能自动检测病稳定深度学习中许多常见的数值不稳定的表达式。</p>
+<p>4.2 病态条件</p>
+<p>输入被轻微扰动而迅速改变的函数对科学计算来说可能是有问题的，因为输入中的摄入误差可能导致输出的巨大变化。</p>
+<p>比如如果矩阵的最大特征值和最小特征值的模之比(绝对值)很大时，矩阵求逆对输入的误差特别敏感。</p>
+<p>4.3 基于梯度的优化方法。</p>
               
             </div>
           </div>
