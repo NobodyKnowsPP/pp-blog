@@ -196,8 +196,7 @@
 <p>连续型随机变量的概率分布用概率密度函数(probability density function, PDF)来描述。用p表示。</p>
 <h1 id="_3">第四章 数值计算</h1>
 <p>4.1 上溢和下溢</p>
-<p>必须对上溢和下溢进行数值稳定的例子是softmax函数。softmax函数经常用语预测与Multinoulli分布相关联的概率。</p>
-<p>$$softmax(\textbf{x})<em>i=\frac{exp(x_i)}{\sum</em>{j=1}^n exp(x_j)}$$</p>
+<p>必须对上溢和下溢进行数值稳定的例子是softmax函数。softmax函数经常用语预测与Multinoulli分布相关联的概率。$softmax(\bf{x})<em>i=\frac{exp(x_i)}{\sum</em>{j=1}^n exp(x_j)}$</p>
 <p>在某些情况下，我们可能在实现一个新的算法是自动保持数值的稳定。比如Theano软件包，能自动检测病稳定深度学习中许多常见的数值不稳定的表达式。</p>
 <p>4.2 病态条件</p>
 <p>输入被轻微扰动而迅速改变的函数对科学计算来说可能是有问题的，因为输入中的摄入误差可能导致输出的巨大变化。</p>
