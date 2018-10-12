@@ -9,7 +9,6 @@
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Section 1 - PP's Notes</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
@@ -110,6 +109,10 @@
 
     </ul>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../section_2/">Section 2</a>
+                </li>
     </ul>
 	    </li>
           
@@ -188,22 +191,74 @@
           <div role="main">
             <div class="section">
               
-                <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
-<h1 id="_1">第二章 线性代数</h1>
+                <h1 id="_1">第二章 线性代数</h1>
 <p>没啥要写的。</p>
 <h1 id="_2">第三章 概率与信息论</h1>
-<p>3.3 概率分布</p>
-<p>离散型随机变量的概率分布用概率质量函数(probability mass function, PMF)来表述。用P表示概率质量函数。</p>
-<p>连续型随机变量的概率分布用概率密度函数(probability density function, PDF)来描述。用p表示。</p>
+<ul>
+<li>3.3 概率分布</li>
+</ul>
+<p>离散型随机变量的概率分布用<code>概率质量函数</code>(probability mass function, PMF)来表述。用P表示概率质量函数。</p>
+<p>连续型随机变量的概率分布用<code>概率密度函数</code>(probability density function, PDF)来描述。用p表示。</p>
 <h1 id="_3">第四章 数值计算</h1>
-<p>4.1 上溢和下溢</p>
-<p>必须对上溢和下溢进行数值稳定的例子是softmax函数。softmax函数经常用语预测与Multinoulli分布相关联的概率。$softmax(\bf{x})<em>i=\frac{exp(x_i)}{\sum</em>{j=1}^n exp(x_j)}$</p>
+<ul>
+<li>4.1 上溢和下溢</li>
+</ul>
+<p>必须对上溢和下溢进行数值稳定的例子是softmax函数。<code>softmax函数</code>经常用语预测与Multinoulli分布相关联的概率。</p>
+<p>
+<script type="math/tex; mode=display">softmax({\boldsymbol x})_i=\frac{exp(x_i)}{\sum_{j=1}^{n}exp(x_j)}</script>
+</p>
 <p>在某些情况下，我们可能在实现一个新的算法是自动保持数值的稳定。比如Theano软件包，能自动检测病稳定深度学习中许多常见的数值不稳定的表达式。</p>
-<p>4.2 病态条件</p>
+<ul>
+<li>4.2 病态条件</li>
+</ul>
 <p>输入被轻微扰动而迅速改变的函数对科学计算来说可能是有问题的，因为输入中的摄入误差可能导致输出的巨大变化。</p>
-<p>比如如果矩阵的最大特征值和最小特征值的模之比(绝对值)很大时，矩阵求逆对输入的误差特别敏感。</p>
-<p>4.3 基于梯度的优化方法。</p>
+<p>比如函数$f({\boldsymbol x})={\boldsymbol A}^{-1}{\boldsymbol x}$如果矩阵${\boldsymbol A}$的<code>最大特征值和最小特征值的模之比(绝对值)</code>很大时，矩阵求逆对输入的误差特别敏感。</p>
+<ul>
+<li>4.3 基于梯度的优化方法。</li>
+</ul>
+<p>梯度(gradient)是相对一个向量求导的导数，f的导数是包含所有偏导数的向量，记为$\nabla_xf({\boldsymbol x})$。在多维的情况下，临界点是梯度中所有元素都为0的点。</p>
+<p>在负梯度的方向上移动可以减小f。这是最速下降法(method of steepest descent)或<code>梯度下降</code>(gradient descent)。$\epsilon$为学习率，<code>普遍的方式是选择一个小常数</code>。还有一种方法是分局几个$\epsilon$计算$f({\boldsymbol x}-\epsilon\nabla_xf({\boldsymbol x}))$，并选择其中能产生最小目标函数值的$\epsilon$。这种策略为<code>线搜索</code>。</p>
+<p>
+<script type="math/tex; mode=display">{\boldsymbol x}'={\boldsymbol x}-\epsilon\nabla_xf({\boldsymbol x})</script>
+</p>
+<p>虽然梯度下降被限制在连续空间中的优化问题，但可以推广到<code>离散空间</code>。递增带有离散参数的目标函数称为<code>爬山</code>(hill climbing)算法。</p>
+<ul>
+<li>4.3.1 梯度之上：Jacobian和Hessian矩阵</li>
+</ul>
+<p>有时我们需要计算输入和输出都是向量的函数的所有偏导数。包含所有这样的偏导数的矩阵被称为雅可比(Jacobian)矩阵.</p>
+<p>有时我们对二阶导数(曲率)感兴趣，我们将这些导数合并为一个矩阵，称为黑赛(Hessian)矩阵。Hessain矩阵等价于梯度的Jacobian矩阵。在深度学习背景下，遇到的大多数函数的Hessian矩阵几乎处处都是对称的。</p>
+<p>因为Hessain矩阵是实对称的，我们可以将其分解为一组实特征值和一组特征向量的正交基。在特定方向${\boldsymbol d}$上的二阶导数可以写成${\boldsymbol d}^T\boldsymbol{Hd}$（${\boldsymbol d}$是一个特征向量，这个式子的乘积是一个数，是与特征向量${\boldsymbol d}$对应的特征值）。当${\boldsymbol d}$是${\boldsymbol H}$的一个特征向量时，<code>这个方向的二阶导数就是对应的特征值</code>。对于其他方向的${\boldsymbol d}$，不是特征向量，该方向的二阶导数是所有特征值的<code>加权平均</code>，与特征向量${\boldsymbol d}$的夹角越小的权重越大。最大特征值确定最大二阶导数，最小特征值确定最小二阶导数。</p>
+<p>在多维的情况下，我们需要检测函数的所有二阶导数，可以用过检测Hessian的特征值来判断临界点是局部极大点、局部极小点还是鞍点。当Hessian矩阵<code>正定</code>时，临界点时局部极小点；<code>负定</code>时，是局部极大点。跟高中的导数和二阶导数是一样的。</p>
+<p>用Hessian矩阵的信息来指导搜索，最简单的方法是牛顿法(Newton's method)。牛顿法基于一个二阶泰勒展开来近似${\boldsymbol x}^{(0)}$附近的$f(\boldsymbol x)$。当$f$是一个正定二次函数时，牛顿法只要用一次${\boldsymbol x}^*={\boldsymbol{x}}^{(0)}-{\boldsymbol{H}}(f)({\boldsymbol{x}}^{(0)})^{-1}\nabla_x f({\boldsymbol{x}}^{(0)})$就能直接条到函数的最小点。如果$f$不是一个真正二次但是能在局部近似为正定二次，牛顿法则需要迭代应用该式。<code>迭代地更新近似函数和跳到近似函数的最小点</code>可以比<code>梯度下降</code>更快地到达临界点。这在接近局部极小点时是一个特别有用的性质，但是<code>在鞍点附近是有害的</code>。</p>
+<p>仅使用梯度信息的优化算法被称为<code>一阶优化算法</code>(first-order optimization algorithms)，如梯度下降。使用Hessian矩阵的优化算法被称为<code>二阶最优化算法</code>(second-order optimization algorithms)，如牛顿法。</p>
+<blockquote>
+<p><code>Lipschitz条件</code>即利普希茨连续条件，是一个比通常连续更强的<code>光滑性条件</code>。直觉上，Lipschitz连续函数限制了函数改变的速度，符合Lipschitz条件的函数的斜率，必小于一个称为Lipschitz常数的实数。</p>
+</blockquote>
+<p>在深度学习的背景下，限制函数满足Lipschitz连续或其导数Lipschitz连续可以获得一些保证。Lipschitz连续函数的变化速度以Lipschitz常数$\cal L$为界。这个属性允许我们量化我们的假设——梯度下降等算法导致的输入的微小变化将使输出只产生微小变化，因此是很有用的。（变化速度是有上界的）</p>
+<p>最成功的特定优化领域或许是<code>凸优化</code>(Convex optimization)。凸优化通过<code>更强的限制</code>提供更多的保证。凸优化算法只对凸函数适用，即Hessian处处半正定的函数。因为这些函数没有鞍点而且其所有局部极小点必然是全局最小点。然而深度学习中的大多数问题都难以表示成凸优化的形式。凸优化仅用作一些深度学习算法的子程序。凸优化中的分析思路对证明深度学习算法的收敛性非常有用，然而一般来说，深度学习背景下凸优化的重要性大大减少。</p>
+<ul>
+<li>4.4 约束优化</li>
+</ul>
+<p>有时候，我们希望在$\boldsymbol{x}$所有可能值下最小化一个函数$f(x)$；有时候，我们可能希望在$\boldsymbol{x}$的某些集合$\Bbb{S}$中找$f(x)$最小值。这就是<code>约束优化</code>(constrained optimization)。在约束优化术语中，集合$\Bbb{S}$内的点$\boldsymbol{x}$被称为<code>可行点</code>(feasible)。我们尝尝希望找到在某种意义上小的解，针对这种情况下的常见方法是强加一个<code>范数约束</code>，如$\parallel{\boldsymbol{x}}\parallel\leq 1$。</p>
+<p>约束优化的一个简单方法是将约束考虑在内后简单地对梯度下降进行修改。如果我们使用一个小的恒定的步长$\epsilon$，我们可以先取梯度下降的单步结果，然后将结果投影回$\Bbb{S}$。如果我们使用线搜索，我们只能在步长为$\epsilon$的范围内搜索可行的新$\boldsymbol{x}$点，或者我们可以将线上的每个点投影到约束区域。如果可能的话，在梯度下降或者线搜索前将梯度投影到可行域的切空间会更高效。</p>
+<p>约束优化的一个更复杂的方法是设计一个不同的、无约束的优化问题，其解可以转化成原始约束问题的解。<code>Karush-Kuhn-Tucker(KKT)</code>方法是针对约束优化非常通用的解决方案。</p>
+<p>介绍KKT方法，我们引入一个称为广义Lagrangian(generalized Lagrangian)或<code>广义Lagrange函数</code>(generalized Lagrange function)的新函数。为了定义Lagrangian，我们先要通过等式和不等式的形式描述$\Bbb{S}$。我们希望通过m个等式约束$g^{(i)}$和n个不等式约束$h^{(j)}$描述$\Bbb{S}$。我们为每个约束引入新的变量$\lambda_i$和$\alpha_j$，这些新变量被称为KKT乘子。广义的Lagrangian可以如下定义：</p>
+<p>
+<script type="math/tex; mode=display">L({\boldsymbol{x},\boldsymbol{\lambda},\boldsymbol{\alpha}})=f({\boldsymbol{x}})+\sum_i\lambda_i g^{(i)}({\boldsymbol{x}})+\sum_j\alpha_j h^{(j)}({\boldsymbol{x}})</script>
+</p>
+<p>现在可以通过优化无约束的广义Lagrangian解决约束最小化问题。只要存在至少一个可行点且$f(\boldsymbol{x})$不允许取$\infty$，那么</p>
+<p>
+<script type="math/tex; mode=display">\min_{\boldsymbol{x}} \max_{\boldsymbol{\lambda}} \max_{\boldsymbol{\alpha},\boldsymbol{\alpha}\geq0}L({\boldsymbol{x},\boldsymbol{\lambda},\boldsymbol{\alpha}})</script>
+</p>
+<p>与下列函数有相同的最优目标函数值和最优点集$\boldsymbol{x}$。</p>
+<p>
+<script type="math/tex; mode=display">\min_{\boldsymbol{x}\in\Bbb{S}}f({\boldsymbol{x}})</script>
+</p>
+<p>如果$h^{(i)}({\boldsymbol{x}}^*=0)$，则称这个不等式约束是<code>活跃</code>的。</p>
+<p>我们可以使用一组简单的性质来描述约束优化问题的最优点。这些性质称为Karush-Kuhn-Tucker(KKT)条件。这些是确定一个点是最优点的必要条件，但不一定是充分条件。这些条件是：</p>
+<p>(a)广义Lagrangian的梯度为0。</p>
+<p>(b)所有关于$\boldsymbol{x}$和KKT乘子的约束都满足。</p>
+<p>(c)不等式约束显示的“互补松弛性”：$\boldsymbol{\alpha}\odot h(\boldsymbol{x})=0$。</p>
               
             </div>
           </div>
@@ -211,7 +266,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../code_offer/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../section_2/" class="btn btn-neutral float-right" title="Section 2">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Introduction/" class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -243,12 +298,14 @@
         <span><a href="../Introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../code_offer/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../section_2/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="../.././mathjaxhelper.js"></script>
       <script src="../../search/require.js"></script>
       <script src="../../search/search.js"></script>
 
