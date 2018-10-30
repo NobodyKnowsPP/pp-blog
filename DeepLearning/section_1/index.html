@@ -9,21 +9,23 @@
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Section 1 - PP's Notes</title>
+  <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Section 1";
     var mkdocs_page_input_path = "DeepLearning/section_1.md";
-    var mkdocs_page_url = "/DeepLearning/section_1/";
+    var mkdocs_page_url = null;
   </script>
   
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -37,7 +39,7 @@
         <a href="../.." class="icon icon-home"> PP's Notes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -107,7 +109,7 @@
     <li class="toctree-l3"><a href="#_3">第四章 数值计算</a></li>
     
 
-    <li class="toctree-l3"><a href="#_4">第五章</a></li>
+    <li class="toctree-l3"><a href="#_4">第五章 机器学习基础</a></li>
     
 
     </ul>
@@ -154,6 +156,10 @@
                 <li class="">
                     
     <a class="" href="../../code_offer/java61-66/">Java 61-66</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../code_offer/sort/">基础排序</a>
                 </li>
     </ul>
 	    </li>
@@ -262,7 +268,7 @@
 <p>(1)广义Lagrangian的梯度为0。</p>
 <p>(2)所有关于$\boldsymbol{x}$和KKT乘子的约束都满足。</p>
 <p>(3)不等式约束显示的“互补松弛性”：$\boldsymbol{\alpha}\odot h(\boldsymbol{x})=0$。</p>
-<h1 id="_4">第五章</h1>
+<h1 id="_4">第五章 机器学习基础</h1>
 <p>机器学习本质上属于应用统计学，更多地关注如何用计算机统计地估计复杂函数，不太关注为这些函数提供置信区间；因此我们回探讨两种统计学地主要方法：<code>频率派估计</code>和<code>贝叶斯推断</code>。</p>
 <ul>
 <li>5.1 学习算法</li>
@@ -345,7 +351,15 @@
 <p>
 <script type="math/tex; mode=display">bias(\boldsymbol{\hat{\theta}}_m)=\Bbb{E}(\boldsymbol{\hat{\theta}}_m)-\boldsymbol{\theta}</script>
 </p>
-<p>其中期望作用在所有数据(看作是从随机变量采样得到的)上，$\theta$是用于定义数据生成分布的$\theta$的真是值。如果$bias(\boldsymbol{\hat{\theta}}_m)=0$，则估计量$(\boldsymbol{\hat{\theta}}_m)$被称为是<code>无偏</code>(unbiased)。如果$\lim_{m\to\infty}bias(\boldsymbol{\hat{\theta}}_m)=0$，那么估计量$(\boldsymbol{\hat{\theta}}_m)$被称为是<code>渐进无偏</code>(asymptotically unbiased)。</p>
+<p>其中期望作用在所有数据(看作是从随机变量采样得到的)上，$\theta$是用于定义数据生成分布的$\theta$的真实值。如果$bias(\boldsymbol{\hat{\theta}}_m)=0$，则估计量$(\boldsymbol{\hat{\theta}}_m)$被称为是<code>无偏</code>(unbiased)。如果$\lim_{m\to\infty}bias(\boldsymbol{\hat{\theta}}_m)=0$，那么估计量$(\boldsymbol{\hat{\theta}}_m)$被称为是<code>渐进无偏</code>(asymptotically unbiased)。</p>
+<p>示例：伯努利分布 考虑一组服从均值为$\theta$的伯努利分布的独立同分布的样本$\{\boldsymbol{x}^{(1)},...,\boldsymbol{x}^{(m)}\}$：</p>
+<p>
+<script type="math/tex; mode=display">P(x^{(i)});\theta=\theta^{x^{(i)}}(1-\theta)^{1-x^{(i)}}</script>
+</p>
+<p>这个分布中参数$\theta$的常用估计量是训练样本的均值：</p>
+<p>
+<script type="math/tex; mode=display">\hat{\theta}_{m}=\frac{1}{m}\sum_{i=1}^{m}x^{(i)}</script>
+</p>
               
             </div>
           </div>
@@ -390,11 +404,10 @@
     </span>
 </div>
     <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script src="../.././mathjaxhelper.js"></script>
-      <script src="../../search/require.js"></script>
-      <script src="../../search/search.js"></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../mathjaxhelper.js" defer></script>
+      <script src="../../search/main.js" defer></script>
 
 </body>
 </html>

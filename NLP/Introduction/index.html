@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Random Forest - PP's Notes</title>
+  <title>自然语言处理概述 - PP's Notes</title>
   <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Random Forest";
-    var mkdocs_page_input_path = "Classification/random_forest.md";
+    var mkdocs_page_name = "\u81ea\u7136\u8bed\u8a00\u5904\u7406\u6982\u8ff0";
+    var mkdocs_page_input_path = "NLP/Introduction.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -70,25 +70,19 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../logistic_regression/">Logistic Regression</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">Random Forest</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#introduction">Introduction</a></li>
-    
-
-    </ul>
+    <a class="" href="../../Classification/logistic_regression/">Logistic Regression</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../support_vector_machine/">Support Vector Machine(SVM)</a>
+    <a class="" href="../../Classification/random_forest/">Random Forest</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../back_propagation_neural_networks/">Multi-Layer Perceptron(MLP)</a>
+    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Classification/back_propagation_neural_networks/">Multi-Layer Perceptron(MLP)</a>
                 </li>
     </ul>
 	    </li>
@@ -176,12 +170,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Classification &raquo;</li>
-        
-      
     
-    <li>Random Forest</li>
+    <li>自然语言处理概述</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -191,21 +181,31 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="introduction">Introduction</h1>
-<p>Random Forest，随机森林。</p>
+                <h1 id="_1">自然语言处理概述</h1>
+<p>自然语言处理(Natural Language Processing, NLP)定义：将人的语言形式转化为机器可理解的、结构化的、完整的语义表示。</p>
+<p>NLP的基础是大数据、机器学习和语言学。</p>
+<p>主要研究问题有：
+- 系统层面：<code>问答系统</code>(Question Answering)、<code>机器翻译</code>(Machine Translation)、<code>对话系统</code>(Dialogue)。
+- 语言理解：<code>询问理解</code>（Querying understanding）、<code>文本理解</code>(Document understanding)、<code>情感分析</code>(Sentiment Analysis)。基础是<code>词法</code>(Lexical)、<code>句法</code>(Syntax)、<code>语义</code>(Semantic)等不同层次的分析。
+- 语言生成：<code>写作</code>(Writing)、<code>摘要</code>(Summarization)。
+- 知识图谱：<code>实体图谱</code>(Entity Graph)、<code>注意力图谱</code>(Attention Graph)、<code>意图图谱</code>(Intent Graph)。
+- 应用层面：<code>检索</code>、<code>O2O</code>、<code>广告</code>。</p>
+<p>自然语言处理的困难：
+- 语言歧义性
+- 语言鲁棒性：错字、少字多字、别称、不连贯、噪音
+- 知识依赖：如七天可能是酒店可能是时间
+- 语境依赖：上下文理解，用户画像。</p>
+<p><code>句法语义分析</code>：对给定的句子，进行分词、词性标注、命名实体识别和链接、句法分析、语义角色识别和多义词消歧。</p>
+<p><code>信息抽取</code>：从给定文本中抽取重要的信息，比如，时间、地点、人物、时间、原因、结果、数字、日期、货币、专有名词等等。通俗地说，就是了解谁、在什么时候、什么原因、对谁、做了什么事、有什么结果。涉及到实体识别、时间抽取、因果关系抽取等关键技术。</p>
+<p><code>文本挖掘</code>：包括文本聚类、分类、信息抽取、摘要、情感分析遗迹对挖掘的信息和知识的可视化、交互式的表达界面。目前主流的技术都是基于统计机器学习的。</p>
+<p><code>机器翻译</code>：把输入的源语言文本通过自动翻译获得另外一种语言的文本。根据输入媒介不同，可以细分为文本翻译、语音翻译、手语翻译、图形翻译等等。机器翻译从最早的基于规则的方法到二十年前的基于统计的方法，再到今天的基于神经网络(编码－解码)的方法，逐渐形成了一套比较严谨的方法体系。</p>
+<p><code>信息检索</code>：对大规模的文档进行检索。可简单对文档中的词汇、赋予不同的权重来建立索引，也可以利用句法语义分析、信息抽取、文本挖掘的方法来建立更深层的索引。在查询的时候，对输入的表达式比如一个检索词或者一个句子进行分析，然后在索引里面查找匹配的候选文档，再根据一个排序机制把候选文档排序，然后输出排序得分最高的文档。</p>
+<p><code>问答系统</code>：对一个自然语言表达的问题，由问答系统给出一个精准的答案。需要对自然语言查询语句进行某种程度的语义分析，包括实体链接、关系识别，形成逻辑表达式，然后到知识库中查找可能的候选答案并通过一个排序机制找出最佳的答案。</p>
+<p><code>对话系统</code>：系统通过一系列的对话，跟用户进行聊天、回答、完成某一项任务。涉及到用户意图理解、通用聊天引擎、问答引擎、对话管理等技术。此外，为了体现上下文相关，要具备多轮对话能力。同时，为了体现个性化，要开发用户画像以及基于用户画像的个性化回复。</p>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../support_vector_machine/" class="btn btn-neutral float-right" title="Support Vector Machine(SVM)">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../logistic_regression/" class="btn btn-neutral" title="Logistic Regression"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -229,10 +229,6 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../logistic_regression/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../support_vector_machine/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>基础排序 - PP's Notes</title>
+  <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u57fa\u7840\u6392\u5e8f";
+    var mkdocs_page_input_path = "code_offer/sort.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> PP's Notes</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Welcome</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">User profile</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../UserProfile/Introduction/">Introduction</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Classification</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Classification/logistic_regression/">Logistic Regression</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Classification/random_forest/">Random Forest</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Classification/back_propagation_neural_networks/">Multi-Layer Perceptron(MLP)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deep Learning</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../DeepLearning/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../DeepLearning/section_1/">Section 1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../DeepLearning/section_2/">Section 2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">剑指offer</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java1-10/">Java 1-10</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java11-20/">Java 11-20</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java21-30/">Java 21-30</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java31-40/">Java 31-40</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java41-50/">Java 41-50</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java51-60/">Java 51-60</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../java61-66/">Java 61-66</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">基础排序</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">冒泡排序</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_2">选择排序</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">插入排序</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_4">希尔排序</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_5">快速排序</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_6">归并排序</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_7">堆排序</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">PP's Notes</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>剑指offer &raquo;</li>
+        
+      
+    
+    <li>基础排序</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">冒泡排序</h1>
+<pre><code>   /**
+     * 冒泡排序是每轮找到未排序数的最大值，将其放到最后
+     * 具体的是每轮比较相邻两个数的大小，判断后面的数是不是比前面的数大，如果后面的数大，则j++，如果前面的数大，则交换。
+     * 轮数最多为数组长度-2轮，即i=0,1,2...,len-2。
+     * 如果某轮没有交换任何数的位置，则排序结束。
+     *
+     * 时间复杂度为O(n^2)
+     * @param arr
+     * @return
+     */
+
+    public static int[] bubbleSort(int[] arr){
+        int temp;//设置一个临时变量，因为如果后面的数比前面的数大，则要交换相邻两个数
+
+        //双层嵌套
+        for(int i=0; i&lt;arr.length-1; i++){//排序最多排len-2轮
+            boolean change_flag = false;//为每轮排序设置一个是否改动的flag
+
+            for(int j=0; j&lt;arr.length-1-i; j++){//第i轮的结果排i+1个数，则j最后一个值为arr.length-(1+i)-1
+                if(arr[j] &gt; arr[j+1]){//如果前面的数大于后面的数，则交换位置
+                    change_flag = true;
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+            System.out.print(&quot;round&quot;+ i + &quot;: &quot;);
+            print_arr(arr);
+            if(!change_flag){//如果某轮没有交换数的位置，则排序结束。
+                return arr;
+            }
+        }
+        return arr;
+    }
+</code></pre>
+
+<h1 id="_2">选择排序</h1>
+<pre><code>    /**
+     * 交换排序的主要思想是，每轮找到最小的数，与未排序数的最前面的值交换
+     * 如果未排序值第一个就是最小值，则不用交换(交换也行)
+     * @param arr
+     * @return
+     */
+
+    public static int[] selectSort(int[] arr){
+        for(int i=0; i&lt;arr.length-1; i++){
+            int min_index = i;//i的下标是未排序数的第一个值，min_index保存未排序数的最小值的index
+            for(int j=i+1; j&lt;arr.length; j++){//找到未排序数的最小值的下标
+                if(arr[j] &lt; arr[min_index]){
+                    min_index = j;
+                }
+            }
+            if(min_index != i){//将未排序数的最小值交换到未排序数的第一个。未排序数的第一个值的下标为i
+                int temp = arr[i];
+                arr[i] = arr[min_index];
+                arr[min_index] = temp;
+            }
+            System.out.print(&quot;round&quot; + i + &quot;:&quot;);
+            print_arr(arr);
+        }
+        return arr;
+    }
+</code></pre>
+
+<h1 id="_3">插入排序</h1>
+<pre><code>    /**
+     * 插入排序的主要思想是从左往右，对每个数，将其与前面的数比大小。
+     * 如果比前面的数小，就交换到前面去，如果还比前面的数小，那么继续交换，直到这个数比前面的数大的位置。
+     * @param arr
+     * @return
+     */
+    public static int[] insertSort(int[] arr){
+        for(int i=1; i&lt;arr.length; i++){
+            for(int j=i; j&gt;0; j--){
+                if(arr[j] &lt; arr[j-1]){
+                    int temp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+            System.out.print(&quot;round&quot;+i+&quot;:&quot;);
+            print_arr(arr);
+        }
+        return arr;
+    }
+
+</code></pre>
+
+<h1 id="_4">希尔排序</h1>
+<pre><code>    /**
+     * 希尔排序是按步长，将相隔同样步长的数据分为一组，对step个组分别插入排序
+     * 然后不断减小步长，最后一轮的步长为1。
+     * @param arr
+     * @return
+     */
+
+    public static int[] shellSort(int[] arr){
+        int step = 4;
+        int step_reduce = 2;
+        while(step &gt; 0){//每轮一个步长，一个步长一轮
+            for(int i=0; i&lt;step; i++){//针对当前步长，将数组分为了step个组，每组的数据分别排序
+                for(int j=i+step; j&lt;arr.length; j=j+step){//隔空排序(插入排序)
+                    for(int k=(j-i)/step; k&gt;0; k--){
+                        if(arr[i+(k-1)*step] &gt; arr[i+k*step]){//如果后面的数比较大，则交换arr[j]和arr[j-step]
+                            System.out.println(&quot;i=&quot;+i+&quot; k=&quot;+k+&quot; &quot;+arr[i+(k-1)*step]+&quot;&lt;--&gt;&quot;+arr[i+k*step]);
+                            int temp = arr[i+(k-1)*step];
+                            arr[i+(k-1)*step] = arr[i+k*step];
+                            arr[i+k*step] = temp;
+                        }
+                    }
+                }
+                print_arr(arr);
+            }
+            if(step == 1){ return arr; }//如果当前
+            step = step - step_reduce;
+            if(step&lt;1){ step = 1; }
+        }
+        return arr;
+    }
+</code></pre>
+
+<h1 id="_5">快速排序</h1>
+<pre><code>    /**
+     * 快速排序主要是有两个指针，i在前，j在尾。i寻找比temp大的数，将其写到j的位置上；j寻找比temp小的数，将其写到i的位置上。
+     * 首先将待排序数的第一个数值赋值给temp，后部分指针j先向前寻找，找到比temp小的数，将其写到arr[i]上
+     * 然后指针j不动，指针i向后寻找比temp大的数，将其写到arr[j]上，再换j向前寻找
+     * 直到i=j，则位置i或j则是temp数值的最终位置。
+     * temp的最终位置将数分成前后两部分，分别递归。
+     * @param arr
+     * @return
+     */
+
+    public static int[] quickSort(int[] arr){
+        return qSort(arr, 0, arr.length);
+    }
+
+    public static int[] qSort(int[] arr, int start, int end){
+        if(end - start &lt;= 1){//如果只有一个数或者为空了，则不用排了
+            return arr;
+        }
+
+        int temp = arr[start];//将第一个数赋值给temp
+        int temp_index = start;//随便赋一个值给temp_index
+
+        int i = start;//i为前部分指针
+        int j = end-1;//j为后部分指针
+        while(i &lt; j){//当i和j没有相遇的时候
+            while(arr[j] &gt;= temp &amp;&amp; j &gt; i){//首先j往前走。如果没有找到比temp大的值，并且没有遇到i，则向前走。
+                j--;
+            }
+            if(j == i){//上面的while不满足的原因，一个是j与i相遇了。相遇了，则将temp赋值给arr[j]，则temp的数值到达最终位置。
+                arr[j] = temp;
+                temp_index = j;
+                break;//到达最终位置了则这一轮排序结束，后面递归左右两部分。
+            }else{
+                arr[i] = arr[j];//while不满足的另外一个原因，是j找到了比temp小de值，则将j所指的值覆盖到i上。(后面i开始向后走)
+            }
+
+            while(arr[i] &lt;= temp &amp;&amp; i &lt; j){//i向后走，在没有找到比temp大的数并且没有与j相遇时，向后走。
+                i++;
+            }
+            if(i == j){//如果与j相遇，则temp到达最终位置
+                arr[i] = temp;
+                temp_index = j;
+                break;
+            }else{
+                arr[j] = arr[i];//如果i找到了比temp大的值，则将i所指的值覆盖到j上。
+            }
+            print_arr(arr);
+        }
+        qSort(arr, start, temp_index);//递归排序左右两部分
+        qSort(arr, temp_index+1, end);
+
+        return arr;
+    }
+</code></pre>
+
+<h1 id="_6">归并排序</h1>
+<pre><code>    /**
+     * 归并排序的思想是一个数不排序，两个组排序。
+     * @param arr
+     * @return
+     */
+
+    public static int[] mergeSort(int[] arr){
+        int start = 0;
+        int end = arr.length;
+        return merge(arr, start, end);
+    }
+    public static int[] merge(int[] arr, int start, int end){
+        if(end-start != 1){
+            int mid = (start + end + 1)/2 ;//计算mid，mid为后半部分的第一个数的下标
+            int front = start;//front为前半部分的移动指针
+            int back = mid;//back为后半部分的移动指针
+
+            merge(arr, start, mid);
+            merge(arr, mid, end);
+
+            //收拾好前后两半的部分之后，再收拾合并的部分
+            int[] temp = new int[end-start];//建立一个临时的数组，逐个个保存前后两部分的最小值
+            for(int i=0; i&lt;temp.length; i++){
+                if(front != mid &amp;&amp; back != end){//如果前后两个移动指针都没有出界，则判断谁更小
+                    if(arr[front] &lt;= arr[back]){
+                        temp[i] = arr[front];
+                        front++;//将更小的值写入temp数组后，记得指针后移
+                    }else{
+                        temp[i] = arr[back];
+                        back++;
+                    }
+                }else if(front == mid){
+                    temp[i] = arr[back];//如果前半部分的移动指针已出界，则temp数组直接写入后半部分的数
+                    back++;
+                }else{
+                    temp[i] = arr[front];//后半部分的移动指针已出界
+                    front++;
+                }
+            }
+            for(int i=0; i&lt;temp.length; i++){//覆盖到原数组上
+                arr[i+start] = temp[i];
+            }
+            print_arr(arr);
+        }
+        return arr;
+    }
+</code></pre>
+
+<h1 id="_7">堆排序</h1>
+<pre><code>    /**
+     * 堆排序的主要思想是，如果升序排列，则构造大顶堆；如果降序排列，则构造小顶堆。本代码升序排列。
+     * 从最后一个非叶子结点开始，如果其左右子结点没有大于父结点的值，则向前，找倒数第二个非叶子结点。
+     * 如果左右子结点有大于父结点的值，则调换到父结点上。但是同时要考虑将父结点调换到子结点上后，是否会对后面的结点有影响。
+     * 如果调换到子结点之后，子结点作为父结点，比它的左右子结点都大，则没问题。
+     * 如果比左右子结点的某个值小，则要将较大的子结点调换上来。
+     * 调换之后还要继续考虑是否影响了后面的结点，这里用的是while。
+     * @param arr
+     * @return
+     */
+
+    public static int[] heapSort(int[] arr){
+        return hSort(arr, 0, arr.length-1);
+    }
+
+    public static int[] hSort(int[] arr, int start, int end){
+        if(end-start &lt;= 0){
+            return arr;
+        }
+        int temp;
+        for(int i=(end-1)/2; i&gt;-1; i--){//找到未排序数的最后一个叶子结点的父结点
+            int max_child_index = 0;//要比较父结点和其左右子结点的大小，保存下标
+            if(i*2+2 &lt;= end){//如果该父结点的右结点存在，则左右子结点比较一下，看谁大
+                if(arr[i*2+1] &gt;= arr[i*2+2]){
+                    max_child_index = i*2+1;
+                }else{
+                    max_child_index = i*2+2;
+                }
+            }else{//其左子结点一定存在，不然不是父结点
+                max_child_index = i*2+1;
+            }
+            if(arr[max_child_index] &gt; arr[i]){//如果子结点大于父结点，交换
+                temp = arr[i];
+                arr[i] = arr[max_child_index];
+                arr[max_child_index] = temp;
+
+                //父结点交换到子结点之后，要考虑是不是影响了下面的结点
+                int j = max_child_index;
+                while(j*2+1&lt;=end){//当前结点是父结点的时候
+                    if(j*2+2 &lt;= end){//如果交换下来的数有右子结点，则找到左右子结点的较大值，记下它的下标
+                        if(arr[j*2+1] &gt;= arr[j*2+2]){
+                            max_child_index = j*2+1;
+                        }else{
+                            max_child_index = j*2+2;
+                        }
+                    }else{//如果只有左结点，则较大值的下标就是其左子结点
+                        max_child_index = j*2+1;
+                    }
+
+                    if(arr[j] &lt; arr[max_child_index]){//如果父结点比子结点的较大者小，则需要将父结点交换下去。
+                        temp = arr[j];
+                        arr[j] = arr[max_child_index];
+                        arr[max_child_index] = temp;
+                    }else{//如果父结点比子结点都大，则没问题，影响解除。
+                        break;
+                    }
+                }
+
+            }
+        }
+        temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        print_arr(arr);
+        hSort(arr, start, end-1);
+        return arr;
+    }
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../java61-66/" class="btn btn-neutral" title="Java 61-66"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../java61-66/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../mathjaxhelper.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

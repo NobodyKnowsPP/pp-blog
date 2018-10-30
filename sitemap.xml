@@ -1,88 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/UserProfile/Introduction/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Classification/logistic_regression/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Classification/random_forest/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Classification/support_vector_machine/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Classification/back_propagation_neural_networks/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/DeepLearning/Introduction/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/DeepLearning/section_1/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/DeepLearning/section_2/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/Introduction/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java1-10/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java11-20/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java21-30/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java31-40/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java41-50/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java51-60/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/code_offer/java61-66/</loc>
-     <lastmod>2018-10-14</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>None</loc>
+     <lastmod>2018-10-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

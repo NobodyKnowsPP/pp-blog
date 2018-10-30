@@ -9,14 +9,16 @@
   
   <link rel="shortcut icon" href="./img/favicon.ico">
   <title>PP's Notes</title>
+  <!-- <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'> -->
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
-  <script src="./js/jquery-2.1.1.min.js"></script>
-  <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  <script src="./js/jquery-2.1.1.min.js" defer></script>
+  <script src="./js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -27,10 +29,10 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> PP's Notes</a>
+        <a href="./." class="icon icon-home"> PP's Notes</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -41,7 +43,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href=".">Welcome</a>
+    <a class="" href="./.">Welcome</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -50,7 +52,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="UserProfile/Introduction/">Introduction</a>
+    <a class="" href="./UserProfile/Introduction/">Introduction</a>
                 </li>
     </ul>
 	    </li>
@@ -61,19 +63,19 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="Classification/logistic_regression/">Logistic Regression</a>
+    <a class="" href="./Classification/logistic_regression/">Logistic Regression</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="Classification/random_forest/">Random Forest</a>
+    <a class="" href="./Classification/random_forest/">Random Forest</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
+    <a class="" href="./Classification/support_vector_machine/">Support Vector Machine(SVM)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="Classification/back_propagation_neural_networks/">Multi-Layer Perceptron(MLP)</a>
+    <a class="" href="./Classification/back_propagation_neural_networks/">Multi-Layer Perceptron(MLP)</a>
                 </li>
     </ul>
 	    </li>
@@ -84,15 +86,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="DeepLearning/Introduction/">Introduction</a>
+    <a class="" href="./DeepLearning/Introduction/">Introduction</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="DeepLearning/section_1/">Section 1</a>
+    <a class="" href="./DeepLearning/section_1/">Section 1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="DeepLearning/section_2/">Section 2</a>
+    <a class="" href="./DeepLearning/section_2/">Section 2</a>
                 </li>
     </ul>
 	    </li>
@@ -103,35 +105,39 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="code_offer/Introduction/">Introduction</a>
+    <a class="" href="./code_offer/Introduction/">Introduction</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java1-10/">Java 1-10</a>
+    <a class="" href="./code_offer/java1-10/">Java 1-10</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java11-20/">Java 11-20</a>
+    <a class="" href="./code_offer/java11-20/">Java 11-20</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java21-30/">Java 21-30</a>
+    <a class="" href="./code_offer/java21-30/">Java 21-30</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java31-40/">Java 31-40</a>
+    <a class="" href="./code_offer/java31-40/">Java 31-40</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java41-50/">Java 41-50</a>
+    <a class="" href="./code_offer/java41-50/">Java 41-50</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java51-60/">Java 51-60</a>
+    <a class="" href="./code_offer/java51-60/">Java 51-60</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="code_offer/java61-66/">Java 61-66</a>
+    <a class="" href="./code_offer/java61-66/">Java 61-66</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="./code_offer/sort/">基础排序</a>
                 </li>
     </ul>
 	    </li>
@@ -146,7 +152,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">PP's Notes</a>
+        <a href="./.">PP's Notes</a>
       </nav>
 
       
@@ -154,7 +160,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="./.">Docs</a> &raquo;</li>
     
     
     <li class="wy-breadcrumbs-aside">
@@ -171,7 +177,7 @@
 
   <form id="content_search" action="search.html">
     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus>
+    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus title="Type search term here">
   </form>
 
   <div id="mkdocs-search-results" class="search-results">
@@ -209,11 +215,10 @@
     </span>
 </div>
     <script>var base_url = '.';</script>
-    <script src="./js/theme.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script src="././mathjaxhelper.js"></script>
-      <script src="./search/require.js"></script>
-      <script src="./search/search.js"></script>
+    <script src="./js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="././mathjaxhelper.js" defer></script>
+      <script src="./search/main.js" defer></script>
 
 </body>
 </html>
